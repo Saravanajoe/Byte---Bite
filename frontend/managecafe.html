@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Cafes - Gaming Cafe</title>
+    <link rel="stylesheet" href="styles/adminpage.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Byte&Bite</h2>
+            <ul>
+                <li><a href="managecafe.html">Manage Cafes</a></li>
+                
+            </ul>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="content">
+            <h2>Manage Cafes</h2>
+            <div id="cafesContainer">
+                <!-- Cafes dynamically displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Retrieve cafes and bookings from localStorage
+        const cafes = JSON.parse(localStorage.getItem('cafes')) || [];
+        const bookings = JSON.parse(localStorage.getItem('bookings')) || {};
+
+        // Container to display cafes
+        const cafesContainer = document.getElementById('cafesContainer');
+
+        if (cafes.length === 0) {
+            cafesContainer.innerHTML = '<p>No cafes added yet.</p>';
+        } else {
+            cafes.forEach((cafe, index) => {
+                // Create cafe card
+                const cafeCard = document.createElement('div');
+                cafeCard.className = 'cafe-card';
+
+                cafeCard.innerHTML = `
+                    <h3>${cafe.cafeName}</h3>
+                    <img src="${cafe.image}" alt="${cafe.cafeName}" class="cafe-image">
+                    <p><strong>Location:</strong> ${cafe.location}</p>
+                    <p><strong>Games:</strong> ${cafe.games}</p>
+                    <p><strong>Consoles:</strong> ${cafe.consoles}</p>
+                    <p><strong>Timings:</strong> ${cafe.openClose}</p>
+                    <p><strong>Phone:</strong> ${cafe.phoneNumber}</p>
+                    <p><strong>Instagram:</strong> ${cafe.instagram}</p>
+                    <p><strong>Fee Per Hour:</strong> $${cafe.feePerHour}</p>
+                    <button onclick="viewBookings('${cafe.cafeName}')">View Bookings</button>
+                    <button onclick="deleteCafe(${index})">Delete</button>
+                `;
+
+                cafesContainer.appendChild(cafeCard);
+            });
+        }
+
+        // Function to delete a cafe
+        function deleteCafe(index) {
+            if (confirm('Are you sure you want to delete this cafe?')) {
+                cafes.splice(index, 1);
+                localStorage.setItem('cafes', JSON.stringify(cafes));
+                alert('Cafe deleted successfully!');
+                location.reload();
+            }
+        }
+
+        // Function to view bookings for a specific cafe
+        function viewBookings(cafeName) {
+            const cafeBookings = bookings[cafeName] || [];
+            if (cafeBookings.length === 0) {
+                alert(`No bookings found for ${cafeName}.`);
+            } else {
+                const bookingList = cafeBookings.map((slot, i) => `${i + 1}. ${slot}`).join('\n');
+                const userChoice = prompt(
+                    `Bookings for ${cafeName}:\n\n${bookingList}\n\nEnter the number of the booking to remove it, or click Cancel to go back.`
+                );
+                if (userChoice) {
+                    const bookingIndex = parseInt(userChoice, 10) - 1;
+                    if (cafeBookings[bookingIndex]) {
+                        cafeBookings.splice(bookingIndex, 1);
+                        bookings[cafeName] = cafeBookings;
+                        localStorage.setItem('bookings', JSON.stringify(bookings));
+                        alert('Booking removed successfully!');
+                        location.reload();
+                    } else {
+                        alert('Invalid selection. Please try again.');
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

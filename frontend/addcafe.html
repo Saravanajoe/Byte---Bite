@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Cafe - Gaming Cafe</title>
+    <link rel="stylesheet" href="styles/adminpage.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Byte&Bite</h2>
+            <ul>
+               
+                <li><a href="addcafe.html">Add Cafe</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="content">
+            <h2>Add Cafe</h2>
+            <form id="addCafeForm">
+                <label for="image">Image:</label>
+                <input type="file" id="image" name="image" accept="image/*" required><br><br>
+
+                <label for="cafeName">Cafe Name:</label>
+                <input type="text" id="cafeName" name="cafeName" required><br><br>
+
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" required><br><br>
+
+                <label for="games">Games Available:</label>
+                <textarea id="games" name="games" rows="2" required></textarea><br><br>
+
+                <label for="consoles">Available Consoles:</label>
+                <textarea id="consoles" name="consoles" rows="2" required></textarea><br><br>
+
+                <label for="openClose">Open-Close Timing:</label>
+                <input type="text" id="openClose" name="openClose" placeholder="e.g., 10:00 AM - 8:00 PM" required><br><br>
+
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="123-456-7890" required><br><br>
+
+                <label for="instagram">Instagram ID:</label>
+                <input type="text" id="instagram" name="instagram" placeholder="@your_instagram" required><br><br>
+
+                <label for="feePerHour">Fee Per Hour:</label>
+                <input type="number" id="feePerHour" name="feePerHour" placeholder="Enter fee per hour in USD" required><br><br>
+
+                <!-- Food Menu Section -->
+                <div id="foodMenuSection">
+                    <h3>Food Menu</h3>
+                    <div id="menuItems"></div>
+                    <button type="button" id="addCategoryButton">Add Category</button>
+                </div><br><br>
+
+                <button type="submit">Add Cafe</button>
+            </form>
+        </div>
+    </div>
+    <script>
+
+    const menuItems = document.getElementById('menuItems');
+    const addCategoryButton = document.getElementById('addCategoryButton');
+
+    // Add new food category with sub-items
+    addCategoryButton.addEventListener('click', () => {
+        const categoryDiv = document.createElement('div');
+        categoryDiv.className = 'category';
+
+        categoryDiv.innerHTML = `
+            <input type="text" placeholder="Category Name (e.g., Burger)" class="category-name" required>
+            <button type="button" class="addSubItemButton">Add Sub-item</button>
+            <div class="sub-items"></div>
+        `;
+
+        menuItems.appendChild(categoryDiv);
+
+        //Add sub-items within this category
+        const addSubItemButton = categoryDiv.querySelector('.addSubItemButton');
+        const subItemsDiv = categoryDiv.querySelector('.sub-items');
+
+        addSubItemButton.addEventListener('click', () => {
+            const subItemInput = document.createElement('input');
+            subItemInput.type = 'text';
+            subItemInput.placeholder = 'Sub-item Name (e.g., Cheese Burger)';
+            subItemInput.className = 'sub-item';
+            subItemsDiv.appendChild(subItemInput);
+        });
+    });
+
+    // Handle form submission
+    document.getElementById('addCafeForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const cafes = JSON.parse(localStorage.getItem('cafes')) || [];
+        const reader = new FileReader();
+        const imageFile = document.getElementById('image').files[0];
+
+        reader.onload = function (e) {
+            // Extract food menu structure
+            const foodMenu = [];
+            document.querySelectorAll('.category').forEach(categoryDiv => {
+                const categoryName = categoryDiv.querySelector('.category-name').value;
+                const subItems = Array.from(categoryDiv.querySelectorAll('.sub-item')).map(item => item.value);
+                foodMenu.push({ category: categoryName, items: subItems });
+            });
+
+            const cafeDetails = {
+                cafeName: document.getElementById('cafeName').value,
+                location: document.getElementById('location').value,
+                image: e.target.result, // Base64 Image
+                games: document.getElementById('games').value,
+                consoles: document.getElementById('consoles').value,
+                openClose: document.getElementById('openClose').value,
+                phoneNumber: document.getElementById('phoneNumber').value,
+                instagram: document.getElementById('instagram').value,
+                feePerHour: document.getElementById('feePerHour').value,
+                foodMenu: foodMenu // Save structured food menu
+            };
+
+            cafes.push(cafeDetails);
+            localStorage.setItem('cafes', JSON.stringify(cafes));
+            alert('Cafe details added successfully!');
+            document.getElementById('addCafeForm').reset();
+        };
+
+        if (imageFile) {
+            reader.readAsDataURL(imageFile);
+        }
+    });
+</script>
+      
+</body>
+</html>

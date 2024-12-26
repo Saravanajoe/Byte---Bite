@@ -1,0 +1,59 @@
+/* Center the form on the page */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Full height of the viewport */
+    display: flex;
+    justify-content: center; /* Horizontal centering */
+    align-items: center; /* Vertical centering */
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9; /* Light background color */
+    background-image: url('../assets/images/9a1835cb954cb1b45e7e68024964974b.jpg'); /* Optional background */
+    background-size:cover;
+    background-position: center;
+}
+
+/* Styling for the form container */
+form {
+    background-color: white; /* Form background */
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    width: 300px; /* Fixed width */
+    text-align: center; /* Center elements inside */
+}
+
+/* Label styling */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Input styling */
+input[type="text"], input[type="password"] {
+    width: 100%; /* Full width of the form */
+    padding: 10px;
+    margin-bottom: 15px; /* Spacing between fields */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 5px; /* Rounded edges */
+    font-size: 1em;
+}
+
+/* Button styling */
+button {
+    width: 100%; /* Full width of the form */
+    padding: 10px;
+    background-color: #ff6347; /* Tomato color */
+    color: white; /* White text */
+    border: none;
+    border-radius: 5px; /* Rounded edges */
+    font-size: 1.2em; /* Slightly larger text */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: firebrick; /* Darker red on hover */
+}

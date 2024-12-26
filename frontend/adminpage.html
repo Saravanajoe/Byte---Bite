@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Gaming Cafe</title>
+    <link rel="stylesheet" href="styles/adminpage.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Byte&Bite</h2>
+            <ul>
+                <!-- Redirect to "managecafe.html" -->
+                <li><a href="managecafe.html">Manage Cafes</a></li>
+                <!-- Redirect to "addcafe.html" -->
+                <li><a href="addcafe.html">Add Cafe</a></li>
+                <!-- Logout option -->
+                <li><a href="index.html" id="logout">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Event listener for logout action
+        document.getElementById('logout').addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

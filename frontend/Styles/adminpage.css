@@ -1,0 +1,159 @@
+/* Reset margin, padding, and height for the page */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Full background image and page layout */
+body {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: flex-start; /* Align content at the top */
+    background: url('../assets/images/4k-gaming-3840X2160-wallpaper-k6reht5q7plxo9e5.jpeg') center/cover fixed; /* Background image */
+    font-family: Arial, sans-serif;
+    color: white; /* Text color */
+}
+
+/* Container for sidebar and content */
+.container {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+    margin: 20px auto; /* Center container and add vertical spacing */
+}
+
+/* Sidebar styling */
+.sidebar {
+    width: 250px;
+    min-height: 100vh; /* Full height sidebar */
+    background: rgba(0, 0, 0, 0.8); /* Dark transparent background */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5); /* Shadow for sidebar */
+}
+
+/* Sidebar header */
+.sidebar h2 {
+    font-size: 2rem;
+    color: burlywood;
+    margin-bottom: 20px;
+}
+
+/* Sidebar menu list */
+.sidebar ul {
+    list-style: none; /* No bullets */
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 15px;
+    margin: 10px;
+}
+
+.sidebar ul li a {
+    color: white; /* Text color */
+    text-decoration: none; /* No underlines */
+    font-size: 1.2rem;
+    display: block; /* Make link block level for easier clicking */
+}
+
+.sidebar ul li a:hover {
+    background: tomato; /* Hover effect */
+    border-radius: 5px; /* Rounded corners */
+    padding: 5px;
+}
+
+/* Main content area styling */
+.content {
+    flex-grow: 1; /* Allow content to grow */
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.6); /* Slightly transparent background */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    min-height: calc(100vh - 40px); /* Content height adjusts to viewport */
+}
+
+/* Cafe card container */
+.cafe-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 100%; /* Full width */
+    max-width: 400px; /* Limit card width */
+    text-align: center;
+}
+
+/* Cafe image styling */
+.cafe-card img {
+    width: 80%; /* Reduce the image size */
+    max-width: 300px; /* Limit maximum image size */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px; /* Rounded corners */
+    margin-bottom: 15px; /* Space below the image */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Shadow effect */
+}
+
+/* Cafe details text styling */
+.cafe-card h3 {
+    font-size: 1.5rem;
+    color: burlywood;
+    margin-bottom: 10px;
+}
+
+.cafe-card p {
+    font-size: 1rem;
+    color: white;
+    line-height: 1.5; /* Increase readability */
+    margin: 5px 0;
+}
+
+/* Button styling for delete action */
+.cafe-card button {
+    padding: 10px 20px;
+    background: tomato;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+}
+
+.cafe-card button:hover {
+    background: firebrick;
+}
+
+/* Container for managing cafes in grid layout */
+#cafesContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 20px; /* Space between cards */
+    justify-items: center; /* Center cards */
+    margin-top: 20px;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack sidebar and content */
+    }
+    .sidebar {
+        width: 100%; /* Full-width sidebar on small screens */
+    }
+    .content {
+        padding: 20px;
+    }
+    .cafe-card img {
+        max-width: 90%; /* Adjust image size for smaller screens */
+    }
+}

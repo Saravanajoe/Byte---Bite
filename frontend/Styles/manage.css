@@ -1,0 +1,70 @@
+/* Cafe card container */
+.cafe-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Light border */
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    text-align: center;
+}
+
+/* Cafe image styling */
+.cafe-card img {
+    width: 80%; /* Scale down the image */
+    max-width: 300px; /* Prevent overly large images */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px; /* Rounded corners */
+    margin-bottom: 15px; /* Space below the image */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Add shadow to the image */
+}
+
+/* Cafe details text styling */
+.cafe-card h3 {
+    font-size: 1.5rem;
+    color: burlywood;
+    margin-bottom: 10px;
+}
+
+.cafe-card p {
+    font-size: 1rem;
+    color: white;
+    line-height: 1.5; /* Increase readability */
+    margin: 5px 0;
+}
+
+/* Button styling for delete action */
+.cafe-card button {
+    padding: 10px 20px;
+    background: tomato;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+}
+
+.cafe-card button:hover {
+    background: firebrick;
+}
+
+/* Responsive design for cafe cards */
+@media screen and (max-width: 768px) {
+    .cafe-card {
+        width: 100%; /* Full width for smaller screens */
+    }
+    .cafe-card img {
+        width: 90%; /* Slightly larger images on small screens */
+    }
+    .cafe-card h3 {
+        font-size: 1.3rem; /* Smaller heading */
+    }
+    .cafe-card p {
+        font-size: 0.9rem; /* Adjust details text size */
+    }
+}

@@ -1,0 +1,211 @@
+/* Reset margin, padding, and height */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Background and font styling */
+body {
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: flex-start; /* Align content at the top */
+    background: url('../assets/images/4k-gaming-3840X2160-wallpaper-k6reht5q7plxo9e5.jpeg') center/cover fixed; /* Background image */
+    font-family: Arial, sans-serif;
+    color: white; /* Text color */
+}
+
+/* Dashboard container */
+.dashboard-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    background: rgba(0, 0, 0, 0.7); /* Dark transparent background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.dashboard-container h2 {
+    font-size: 2rem;
+    color: burlywood;
+    margin-bottom: 20px;
+}
+
+/* Cafe card container */
+.cafe-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 100%;
+    max-width: 400px; /* Limit card width */
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Shadow effect */
+}
+
+/* Cafe image styling */
+.cafe-card img {
+    width: 80%; /* Reduce the image size */
+    max-width: 300px; /* Limit maximum image size */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px; /* Rounded corners */
+    margin-bottom: 15px; /* Space below the image */
+}
+
+/* Cafe details text styling */
+.cafe-card h3 {
+    font-size: 1.5rem;
+    color: burlywood;
+    margin-bottom: 10px;
+}
+
+.cafe-card p {
+    font-size: 1rem;
+    color: white;
+    line-height: 1.5; /* Increase readability */
+    margin: 5px 0;
+}
+
+/* Food menu styling */
+.food-menu h3 {
+    font-size: 1.2rem;
+    color: burlywood;
+    margin-top: 15px;
+}
+
+.food-menu h4 {
+    color: tomato;
+    margin-bottom: 5px;
+}
+
+.food-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.9rem;
+    color: white;
+}
+
+.food-menu ul li {
+    margin: 5px 0;
+}
+
+/* Booking button styling */
+.cafe-card button {
+    padding: 10px 20px;
+    background: tomato;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+}
+
+.cafe-card button:hover {
+    background: firebrick;
+}
+
+/* Modal styling */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Dark transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+    color: white;
+}
+
+.modal-content h3 {
+    font-size: 1.5rem;
+    color: burlywood;
+    margin-bottom: 20px;
+}
+
+.modal-content .slot {
+    margin: 10px 0;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal-content .slot:hover {
+    color: lightgreen;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Grid layout for cafe cards */
+#cafesContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 20px; /* Space between cards */
+    justify-items: center; /* Center cards */
+    margin-top: 20px;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .dashboard-container {
+        padding: 15px;
+    }
+
+    .cafe-card img {
+        max-width: 90%; /* Adjust image size for smaller screens */
+    }
+
+    .modal-content {
+        width: 90%; /* Adjust modal size for smaller screens */
+    }
+}
+/* Logout button container */
+.logout-container {
+    position: fixed; /* Keep the button fixed in position */
+    top: 10px; /* Position it at the top */
+    left: 10px; /* Position it to the left */
+    z-index: 1000; /* Ensure it stays above other elements */
+}
+
+#logoutButton {
+    padding: 10px 15px;
+    background: tomato;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+#logoutButton:hover {
+    background: firebrick;
+}

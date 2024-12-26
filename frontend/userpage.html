@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Byte&Bite</title>
+    <link rel="stylesheet" href="styles/userpage.css">
+</head>
+<body>
+    <!-- Logout Button -->
+    <div class="logout-container">
+        <button id="logoutButton">Logout</button>
+    </div>
+
+    <div class="dashboard-container">
+        <h2>Welcome to Byte&Bite</h2>
+        <div id="cafesContainer">
+            <!-- Cafes dynamically displayed here -->
+        </div>
+    </div>
+
+    <!-- Modal for booking slot -->
+    <div id="bookingModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <h3 id="modalCafeName"></h3>
+            <div id="availableSlots">
+                <!-- Available slots will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const cafes = JSON.parse(localStorage.getItem('cafes')) || [];
+        const bookings = JSON.parse(localStorage.getItem('bookings')) || {}; // Store bookings by cafe name
+
+        const cafesContainer = document.getElementById('cafesContainer');
+        const bookingModal = document.getElementById('bookingModal');
+        const closeModal = document.getElementById('closeModal');
+        const modalCafeName = document.getElementById('modalCafeName');
+        const availableSlots = document.getElementById('availableSlots');
+        const logoutButton = document.getElementById('logoutButton');
+
+        if (cafes.length === 0) {
+            cafesContainer.innerHTML = '<p>No cafes available at the moment.</p>';
+        } else {
+            cafes.forEach(cafe => {
+                const cafeCard = document.createElement('div');
+                cafeCard.className = 'cafe-card';
+
+                let foodMenuHTML = '';
+                cafe.foodMenu.forEach(category => {
+                    foodMenuHTML += `<h4>${category.category}</h4><ul>`;
+                    category.items.forEach(item => {
+                        foodMenuHTML += `<li>${item}</li>`;
+                    });
+                    foodMenuHTML += '</ul>';
+                });
+
+                cafeCard.innerHTML = `
+                    <div>
+                        <h3>${cafe.cafeName}</h3>
+                        <img src="${cafe.image}" alt="${cafe.cafeName}" class="cafe-image">
+                        <p><strong>Location:</strong> ${cafe.location}</p>
+                        <p><strong>Games:</strong> ${cafe.games}</p>
+                        <p><strong>Consoles:</strong> ${cafe.consoles}</p>
+                        <p><strong>Timings:</strong> ${cafe.openClose}</p>
+                        <p><strong>Phone:</strong> ${cafe.phoneNumber}</p>
+                        <p><strong>Instagram:</strong> ${cafe.instagram}</p>
+                        <button onclick="openBookingModal('${cafe.cafeName}')">Book Slot</button>
+                    </div>
+                    <div class="food-menu">
+                        <h3>Food Menu:</h3>
+                        ${foodMenuHTML}
+                    </div>
+                `;
+                cafesContainer.appendChild(cafeCard);
+            });
+        }
+
+        function openBookingModal(cafeName) {
+            modalCafeName.textContent = `Available Slots for ${cafeName}`;
+            bookingModal.style.display = 'block';
+
+            const slots = [
+                '10:00 AM - 11:00 AM',
+                '11:00 AM - 12:00 PM',
+                '12:00 PM - 1:00 PM',
+                '1:00 PM - 2:00 PM',
+                '2:00 PM - 3:00 PM',
+                '3:00 PM - 4:00 PM',
+                '4:00 PM - 5:00 PM',
+                '5:00 PM - 6:00 PM',
+                '6:00 PM - 7:00 PM',
+                '7:00 PM - 8:00 PM',
+                '8:00 PM - 9:00 PM',
+                '9:00 PM - 10:00 PM',
+            ];
+
+            availableSlots.innerHTML = ''; // Clear previous slots
+
+            slots.forEach(slot => {
+                const isBooked = bookings[cafeName]?.includes(slot);
+                const slotDiv = document.createElement('div');
+                slotDiv.className = 'slot';
+                slotDiv.textContent = slot;
+
+                if (isBooked) {
+                    slotDiv.style.color = 'red';
+                    slotDiv.textContent += ' - Booked';
+                } else {
+                    slotDiv.style.color = 'green';
+                    slotDiv.addEventListener('click', () => bookSlot(cafeName, slot));
+                }
+
+                availableSlots.appendChild(slotDiv);
+            });
+        }
+
+        function bookSlot(cafeName, slot) {
+            if (!bookings[cafeName]) {
+                bookings[cafeName] = [];
+            }
+
+            if (bookings[cafeName].includes(slot)) {
+                alert('This slot is already booked.');
+            } else {
+                bookings[cafeName].push(slot);
+                localStorage.setItem('bookings', JSON.stringify(bookings));
+                alert('Slot booked successfully!');
+                bookingModal.style.display = 'none';
+                openBookingModal(cafeName); // Refresh modal to update slots
+            }
+        }
+
+        closeModal.addEventListener('click', () => {
+            bookingModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === bookingModal) {
+                bookingModal.style.display = 'none';
+            }
+        });
+
+        // Logout functionality
+        logoutButton.addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="styles/admin.css">
+</head>
+<body>
+    <form id="adminLoginForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" placeholder="Enter your username" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required><br><br>
+
+        <button type="button" id="loginButton">Login</button>
+    </form>
+
+    
+    <script>
+        // Predefined admin credentials
+        const validUsername = "admin";
+        const validPassword = "1234";
+
+        // Event listener for the login button
+        document.getElementById("loginButton").addEventListener("click", function() {
+            // Get the input values
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Validate credentials
+            if (username === validUsername && password === validPassword) {
+                alert("Login successful!");
+                window.location.href = "adminpage.html"; // Redirect to the admin page
+            } else {
+                alert("Invalid username or password. Please try again.");
+            }
+        });
+    </script>
+</body>
+</html>
