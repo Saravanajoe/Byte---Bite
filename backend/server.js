@@ -12,7 +12,7 @@ const PORT = 5000;
 const JWT_SECRET = 'your_secret_key_here';
 
 // MongoDB Connection
-mongoose.connect('mongodb://127.0.0.1:27017/byteandbite', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb+srv://Saravana:admin123@cluster0saravanakumar.ys8zs.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0saravanakumar', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.error('MongoDB connection error:', err));
 
